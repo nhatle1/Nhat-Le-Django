@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap-4.0.0-dist/css/bootstrap-grid.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-4.0.0-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="{% static 'script/script.js' %}"></script>
+    <link rel="stylesheet" href="{%static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/yourcode.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="{%static 'images/logo.png' %}" alt="logo pic" class="logo"></a>
+        </div>
+        <label>
+            <div class="search-box">
+                <button type="button" class="btn btn-light search-btn"><i class="fa fa-search fa-2x"></i></button>
+                <input type="text">
+            </div>
+            <div class="shopping-cart-btn">
+                <a href="giohang.html"><button type="button" class="btn btn-light"><i class="fa fa-shopping-cart fa-2x"></i></button></a>
+                <span class="number-of-products">0</span>
+            </div>
+        </label>
+    </header>
+    <nav>
+        <div class="navforicon">
+            <div class="dropdownicon">
+                <a href="javascript:void(0);" onclick="dropdownmenu()">&#9776;</a>
+            </div>
+            <label>
+                <button type="button" class="btn btn-primary shopping-cart-btn"><i class="fa fa-shopping-cart fa-lg"></i></button>
+                <input type="text" placeholder="Search..">
+            </label>
+        </div>
+        <ul class="topnav" id="navbar">
+            <li><a href="/mayphoto/">máy photocopy</a></li>
+            <li><a href="/bangtuongtac/">bảng tương tác</a></li>
+            <li><a href="/printscan/">print-scan</a></li>
+            <li><a href="/maychieu/">máy chiếu</a></li>
+            <li><a href="/manhinhghep/">màn hình ghép</a></li>
+            <li><a href="/dichvu/">dịch vụ</a></li>
+            <li><a href="/tintuc/">tin tức</a></li>
+        </ul>
+    </nav>
+    {% block content %}
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="{% static 'images/info1.png' %}">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="{% static 'images/info2.png' %}">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="{% static 'images/info3.png' %}">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="{% static 'images/info4.png' %}">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="{% static 'images/info5.png' %}">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div class="about">
+        <div class="row">
+            <div class="logo-header">
+                <img src="{% static 'images/logo2.png' %}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="box">
+                    <div class="head-logo">
+                        <img src="{% static 'images/heart.png' %}">
+                    </div>
+                    <label>Bảo hành tận nơi</label>
+                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>            
+            </div>
+            <div class="col-lg-4">
+                <div class="box">
+                    <div class="head-logo">
+                        <img src="{% static 'images/truck.png' %}">
+                    </div>
+                    <label>Phân phát toàn quốc</label>
+                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="box">
+                    <div class="head-logo">
+                        <img src="{% static 'images/present.png' %}">
+                    </div>
+                    <label>Ưu đãi khách hàng</label>
+                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    <div class="description">
+        <div class="row">
+            <div class="col-sm-6">
+                <ul>
+                    <li><a href="/vechungtoi/">Về chúng tôi</a></li>
+                    <li><a href="https://vn.sharp/ve-chung-toi">Về Sharp</a></li>
+                    <li><a href="/dichvuthuemayphotocopy/">Dịch vụ thuê máy photocopy</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-6">
+                <ul>
+                    <li><a href="/dichvubaotribaohanhmay/">Dịch vụ bảo trì, bảo hành máy</a></li>
+                    <li><a href="/thongbaobaotrimay/">Thông báo bảo trì máy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer class="row">
+        <div class="col-sm-12 col-lg-2 logobox">
+            <a href="index.html"><img src="{% static 'images/logo.png' %}"></a>
+        </div>
+        <div class="col-sm-12 col-lg-5 footer-info">
+            <p>127 Đường số 7, Phường An Phú, Quận 2, Thành phố Thủ Đức, Việt Nam</p><br>
+            <p>SĐT: +84-28-22530530 Mã số doanh nghiệp: 0303208007 do Sở KH&ĐT cấp ngày 25/02/2004</p><br>
+            <p>Hotline: 0919 614 119</p>           
+        </div>
+        <div class="col-sm-12 col-lg-5 social-media">
+            <ul>
+                <li><a href="#"><img src="{% static 'images/zalo.png' %}"></a></li>
+                <li><a href="#" class="fa fa-envelope"></a></li>
+                <li><a href="#" class="fa fa-facebook"></a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
