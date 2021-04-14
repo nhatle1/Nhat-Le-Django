@@ -3,46 +3,19 @@
 {% block content %}
 <div class="container-fluid products">
     <div class="row">
+    {% for object in objects %}
         <div class="col-md-4 col-lg-3 product-card">
             <div class="card">
-                <div class="card-img"><img src="{% static 'images/may-photocopy-sharp-18827.png' %}"></div>
+                <div class="card-img"><img src="{{ object.image.url }}"></div>
                 <div class="card-body">
-                    <h4 class="card-title">Máy photocopy</h4>
-                    <div class="price text-success"><h5 class="mt-4">$125</h5></div>
+                    <h4 class="card-title">{{ object.title }}</h4>
+                    <div class="card-description">{{ object.description }}</div>
+                    <div class="price text-success"><h5 class="mt-4">${{ object.price }}</h5></div>
                     <div class="shopping-cart-button"><button type="button" class="add-cart btn btn-danger mt-3"><i class="fa fa-shopping-cart"></i> Add to Cart</button></div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-lg-3 product-card">
-            <div class="card">
-                <div class="card-img"><img src="{% static 'images/may-photocopy-sharp-18827.png' %}"></div>
-                <div class="card-body">
-                    <h4 class="card-title">Máy photocopy</h4>
-                    <div class="price text-success"><h5 class="mt-4">$125</h5></div>
-                    <div class="shopping-cart-button"><button type="button" class="add-cart btn btn-danger mt-3"><i class="fa fa-shopping-cart"></i> Add to Cart</button></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-lg-3 product-card">
-            <div class="card">
-                <div class="card-img"><img src="{% static 'images/may-photocopy-sharp-18827.png' %}"></div>
-                <div class="card-body">
-                    <h4 class="card-title">Máy photocopy</h4>
-                    <div class="price text-success"><h5 class="mt-4">$125</h5></div>
-                    <div class="shopping-cart-button"><button type="button" class="add-cart btn btn-danger mt-3"><i class="fa fa-shopping-cart"></i> Add to Cart</button></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-lg-3 product-card">
-            <div class="card">
-                <div class="card-img"><img src="{% static 'images/may-photocopy-sharp-18827.png' %}"></div>
-                <div class="card-body">
-                    <h4 class="card-title">Máy photocopy</h4>
-                    <div class="price text-success"><h5 class="mt-4">$125</h5></div>
-                    <div class="shopping-cart-button"><button type="button" class="add-cart btn btn-danger mt-3"><i class="fa fa-shopping-cart"></i> Add to Cart</button></div>
-                </div>
-            </div>
-        </div>
+    {% endfor %}
     </div>
 </div>
 {% endblock %}

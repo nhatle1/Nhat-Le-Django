@@ -1,4 +1,8 @@
 from django.shortcuts import render
+from .models import (
+    BangTuongTacProduct,
+)
+
 
 # Create your views here.
 def home_view(request):
@@ -8,7 +12,11 @@ def dichvu_view(request):
     return render(request, 'dichvu.html', {})
 
 def bangtuongtac_view(request):
-    return render(request, 'bangtuongtac.html', {})
+    objs = BangTuongTacProduct.objects.all()
+    context = {
+        'objects': objs
+    }
+    return render(request, 'bangtuongtac.html', context)
 
 def dichvubaotribaohanhmay_view(request):
     return render(request, 'dichvubaotribaohanhmay.html', {})
