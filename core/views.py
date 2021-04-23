@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import (
-    BangTuongTacProduct,
+    Product,
 )
 
 
@@ -12,7 +12,7 @@ def dichvu_view(request):
     return render(request, 'dichvu.html', {})
 
 def bangtuongtac_view(request):
-    objs = BangTuongTacProduct.objects.all()
+    objs = Product.objects.all()
     context = {
         'objects': objs
     }
@@ -34,7 +34,11 @@ def maychieu_view(request):
     return render(request, 'maychieu.html', {})
 
 def mayphoto_view(request):
-    return render(request, 'mayphoto.html', {})
+    objs = Product.objects.all()
+    context = {
+        'objects': objs
+    }
+    return render(request, 'mayphoto.html', context)
 
 def tintuc_view(request):
     return render(request, 'tintuc.html', {})

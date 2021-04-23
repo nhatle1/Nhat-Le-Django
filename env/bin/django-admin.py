@@ -1,4 +1,4 @@
-#!/home/nhat/Desktop/Nhat-Le-Django/env/bin/python
+#!/home/nhatle/Desktop/Nhat-Le-Django/env/bin/python
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

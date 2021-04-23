@@ -4,6 +4,7 @@
 <div class="container-fluid products">
     <div class="row">
     {% for object in objects %}
+        {% if object.productType == "bang tuong tac" %}
         <div class="col-md-4 col-lg-3 product-card">
             <div class="card">
                 <div class="card-img"><img src="{{ object.image.url }}"></div>
@@ -15,6 +16,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     {% endfor %}
     </div>
 </div>
