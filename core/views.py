@@ -19,20 +19,62 @@ def home_view(request):
     return render(request, 'index.html', context)
 
 def dichvu_view(request):
-    return render(request, 'dichvu.html', {})
+    if request.user.is_authenticated:
+        customer =  request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        order = { 'get_cart_total':0 }
+
+    context = {
+        'order':order,
+        'cartItems':cartItems,
+    }
+    return render(request, 'dichvu.html', context)
 
 def bangtuongtac_view(request):
+    if request.user.is_authenticated:
+        customer =  request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        order = { 'get_cart_total':0 }
+
     objs = Product.objects.all()
     context = {
-        'objects': objs
+        'order':order,
+        'cartItems':cartItems,
+        'objects': objs,
     }
     return render(request, 'bangtuongtac.html', context)
 
 def dichvubaotribaohanhmay_view(request):
-    return render(request, 'dichvubaotribaohanhmay.html', {})
+    if request.user.is_authenticated:
+        customer =  request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        order = { 'get_cart_total':0 }
+
+    context = {
+        'order':order,
+        'cartItems':cartItems,
+    }
+    return render(request, 'dichvubaotribaohanhmay.html', context)
 
 def dichvuthuemayphotocopy_view(request):
-    return render(request, 'dichvuthuemayphotocopy.html', {})
+    if request.user.is_authenticated:
+        customer =  request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        order = { 'get_cart_total':0 }
+
+    context = {
+        'order':order,
+        'cartItems':cartItems,
+    }
+    return render(request, 'dichvuthuemayphotocopy.html', context)
 
 def giohang_view(request):
     if request.user.is_authenticated:
@@ -52,29 +94,110 @@ def giohang_view(request):
     return render(request, 'giohang.html', context)
 
 def manhinhghep_view(request):
-    return render(request, 'manhinhghep.html', {})
+    if request.user.is_authenticated:
+        customer =  request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        order = { 'get_cart_total':0 }
 
-def maychieu_view(request):
-    return render(request, 'maychieu.html', {})
-
-def mayphoto_view(request):
     objs = Product.objects.all()
     context = {
-        'objects': objs
+        'order':order,
+        'cartItems':cartItems,
+        'objects': objs,
+    }
+    return render(request, 'manhinhghep.html', context)
+
+def maychieu_view(request):
+    if request.user.is_authenticated:
+        customer =  request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        order = { 'get_cart_total':0 }
+
+    objs = Product.objects.all()
+    context = {
+        'order':order,
+        'cartItems':cartItems,
+        'objects': objs,
+    }
+    return render(request, 'maychieu.html', context)
+
+def mayphoto_view(request):
+    if request.user.is_authenticated:
+        customer =  request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        order = { 'get_cart_total':0 }
+
+    objs = Product.objects.all()
+    context = {
+        'order':order,
+        'cartItems':cartItems,
+        'objects': objs,
     }
     return render(request, 'mayphoto.html', context)
 
 def tintuc_view(request):
-    return render(request, 'tintuc.html', {})
+    if request.user.is_authenticated:
+        customer =  request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        order = { 'get_cart_total':0 }
+
+    context = {
+        'order':order,
+        'cartItems':cartItems,
+    }
+    return render(request, 'tintuc.html', context)
 
 def vechungtoi_view(request):
-    return render(request, 'vechungtoi.html', {})
+    if request.user.is_authenticated:
+        customer =  request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        order = { 'get_cart_total':0 }
+
+    context = {
+        'order':order,
+        'cartItems':cartItems,
+    }
+    return render(request, 'vechungtoi.html', context)
 
 def printscan_view(request):
-    return render(request, 'printScan.html', {})
+    if request.user.is_authenticated:
+        customer =  request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        order = { 'get_cart_total':0 }
+
+    objs = Product.objects.all()
+    context = {
+        'order':order,
+        'cartItems':cartItems,
+        'objects': objs,
+    }
+    return render(request, 'printScan.html', context)
 
 def thongbaobaotrimay_view(request):
-    return render(request, 'thongbaobaotrimay.html', {})
+    if request.user.is_authenticated:
+        customer =  request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        order = { 'get_cart_total':0 }
+
+    context = {
+        'order':order,
+        'cartItems':cartItems,
+    }
+    return render(request, 'thongbaobaotrimay.html', context)
 
 def updateItem_view(request):
     data = json.loads(request.body)

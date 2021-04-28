@@ -1,7 +1,6 @@
 {% extends "index.html" %}
 {% load static %}
 {% block content %}
-<!-- <h1>{{cartItems}}</h1> -->
 <div class="shopping-cart-content">
     <div class="shopping-cart-table">
         <h2>Giỏ hàng của tôi</h2>
@@ -15,7 +14,13 @@
                 <ul>
                     <li class="product-name"><span>{{ item.product.title }}</span></li>
                     <li class="remove-button"><span class="rmv-btn">Remove</span></li>
-                    <li class="product-quantity"><input class="update-cart" type="number" min="1" value="{{ item.quantity }}"></li>
+                    <li class="product-quantity">
+                        <div class="cart-quantity">
+                            <span class="quantity-decrease update-cart" data-product="{{ item.product.id }}" data-action="remove">-</span>
+                            <input class="quantity-input" value="{{ item.quantity }}">
+                            <span class="quantity-increase update-cart" data-product="{{ item.product.id }}" data-action="add">+</span>
+                        </div>
+                    </li>
                 </ul>
             </div>
             <div class="product-price column">

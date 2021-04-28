@@ -12,7 +12,7 @@
                     <h4 class="card-title">{{ object.title }}</h4>
                     <div class="card-description">{{ object.description }}</div>
                     <div class="price text-success"><h5 class="mt-4">${{ object.price }}</h5></div>
-                    <div class="shopping-cart-button"><button type="button" class="add-cart btn btn-danger mt-3"><i class="fa fa-shopping-cart"></i> Add to Cart</button></div>
+                    <div class="shopping-cart-button"><button type="button" class="update-cart btn btn-danger mt-3" data-product="{{ object.id }}" data-action="add"><i class="fa fa-shopping-cart"></i> Add to Cart</button></div>
                 </div>
             </div>
         </div>
