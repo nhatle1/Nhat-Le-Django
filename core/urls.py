@@ -1,20 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views import (
-    home_view, 
-    bangtuongtac_view, 
-    dichvu_view,
-    dichvubaotribaohanhmay_view, 
-    dichvuthuemayphotocopy_view,
-    giohang_view,
-    manhinhghep_view,
-    maychieu_view,
-    mayphoto_view,
-    printscan_view,
-    thongbaobaotrimay_view,
-    tintuc_view, 
-    vechungtoi_view,
-)
+from .views import *
 
 app_name = 'core'
 
@@ -32,4 +18,5 @@ urlpatterns = [
     path('thongbaobaotrimay/', thongbaobaotrimay_view, name="thongbaobaotrimay-view"),
     path('tintuc/', tintuc_view, name="tintuc-view"),
     path('vechungtoi/', vechungtoi_view, name="vechungtoi-view"),
+    path('updateItem/', updateItem_view, name="update-item")
 ]

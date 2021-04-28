@@ -19,11 +19,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"> 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script type=text/javascript>
+        var user = '{{request.user}}'
+        function getToken(name)
+        {
+            var cookieValue = null
+            if (document.cookie && document.cookie !== '')
+            {
+                var cookies = document.cookie.split(';')
+                for (i = 0; i < cookies.length; ++i)
+                {
+                    var cookie = cookies[i].trim()
+                    if (cookie.substring(0, name.length + 1) === (name + '='))
+                    {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length+1))
+                        break
+                    }
+                }
+            }
+            return cookieValue
+        }
+        var csrftoken = getToken('csrftoken')
+    </script>
+    <script type="text/javascript" src="{% static 'script/cart.js' %}" async></script>
 </head>
 <body>
     <header>
         <div class="logo-container">
-            <a href="index.html"><img src="{%static 'images/logo.png' %}" alt="logo pic" class="logo"></a>
+            <a href="/"><img src="{%static 'images/logo.png' %}" alt="logo pic" class="logo"></a>
         </div>
         <label>
             <div class="search-box">
@@ -31,8 +54,8 @@
                 <input type="text">
             </div>
             <div class="shopping-cart-btn">
-                <a href="giohang.html"><button type="button" class="btn btn-light"><i class="fa fa-shopping-cart fa-2x"></i></button></a>
-                <span class="number-of-products">0</span>
+                <a href="/giohang/"><button type="button" class="btn btn-light"><i class="fa fa-shopping-cart fa-2x"></i></button></a>
+                <span class="number-of-products">{{cartItems}}</span>
             </div>
         </label>
     </header>

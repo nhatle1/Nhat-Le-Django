@@ -1,131 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet" href="bootstrap-4.0.0-dist/css/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="bootstrap-4.0.0-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-    <script src="script/script.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://kit.fontawesome.com/yourcode.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"> 
-    <script src="script/shopping-cart.js" async></script>      
-</head>
-<body>
-    <header>
-        <div class="logo-container">
-            <a href="index.html"><img src="images/logo.png" alt="logo pic" class="logo"></a>
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+<!-- <h1>{{cartItems}}</h1> -->
+<div class="shopping-cart-content">
+    <div class="shopping-cart-table">
+        <h2>Giỏ hàng của tôi</h2>
+        <div class="row shopping-cart-description">
+            <span>Price</span>
         </div>
-        <label>
-            <div class="search-box">
-                <button type="button" class="btn btn-light search-btn"><i class="fa fa-search fa-2x"></i></button>
-                <input type="text">
-            </div>
-            <div class="shopping-cart-btn">
-                <a href="giohang.html"><button type="button" class="btn btn-light"><i class="fa fa-shopping-cart fa-2x"></i></button></a>
-                <span class="number-of-products">0</span>
-            </div>
-        </label>
-    </header>
-    <nav>
-        <div class="navforicon">
-            <div class="dropdownicon">
-                <a href="javascript:void(0);" onclick="dropdownmenu()">&#9776;</a>
-            </div>
-            <label>
-                <button type="button" class="btn btn-primary shopping-cart-btn"><i class="fa fa-shopping-cart fa-lg"></i></button>
-                <input type="text" placeholder="Search..">
-            </label>
-        </div>
-        <ul class="topnav" id="navbar">
-            <li><a href="mayphoto.html">máy photocopy</a></li>
-            <li><a href="bangtuongtac.html">bảng tương tác</a></li>
-            <li><a href="printScan.html">print-scan</a></li>
-            <li><a href="maychieu.html">máy chiếu</a></li>
-            <li><a href="manhinhghep.html">màn hình ghép</a></li>
-            <li><a href="dichvu.html">dịch vụ</a></li>
-            <li><a href="tintuc.html">tin tức</a></li>
-        </ul>
-    </nav>
-    <div class="shopping-cart-content">
-        <div class="shopping-cart-table">
-            <h2>Giỏ hàng của tôi</h2>
-            <div class="row shopping-cart-description">
-                <span>Price</span>
-            </div>
-            <div class="row product-info">
-                <img class="product-img" src="images/may-photocopy-sharp-18827.png">
-                <div class="col-sm-7 product-specs column">
-                    <ul>
-                        <li class="product-name"><span>Máy photocopy</span></li>
-                        <li class="remove-button"><span class="rmv-btn">Remove</span></li>
-                        <li class="product-quantity"><input class="cart-quantity-input" type="number" min="1" value="1"></li>
-                    </ul>
-                </div>
-                <div class="product-price column">
-                    <span>$9.99</span>
-                </div>
-            </div>
-            <div class="row product-info">
-                <img class="product-img" src="images/may-photocopy-sharp-18827.png">
-                <div class="col-sm-7 product-specs column">
-                    <ul>
-                        <li class="product-name"><span>Máy photocopy</span></li>
-                        <li class="remove-button"><span class="rmv-btn">Remove</span></li>
-                        <li class="product-quantity"><input class="cart-quantity-input" type="number" min="1" value="1"></li>
-                    </ul>
-                </div>
-                <div class="product-price column">
-                    <span>$9.99</span>
-                </div>
-            </div>
-            <div class="row cart-total">
-                <span class="total-header">Total</span>
-                <div class="total-price">
-                    <span>$0</span>
-                </div>
-            </div>
-        </div>
-    </div><div class="description">
-        <div class="row">
-            <div class="col-sm-6">
+        {% for item in items %}
+        <div class="row product-info">
+            <img class="product-img" src="{{ item.product.image.url }}">
+            <div class="col-sm-7 product-specs column">
                 <ul>
-                    <li><a href="vechungtoi.html">Về chúng tôi</a></li>
-                    <li><a href="https://vn.sharp/ve-chung-toi">Về Sharp</a></li>
-                    <li><a href="dichvuthuemayphotocopy.html">Dịch vụ thuê máy photocopy</a></li>
+                    <li class="product-name"><span>{{ item.product.title }}</span></li>
+                    <li class="remove-button"><span class="rmv-btn">Remove</span></li>
+                    <li class="product-quantity"><input class="update-cart" type="number" min="1" value="{{ item.quantity }}"></li>
                 </ul>
             </div>
-            <div class="col-sm-6">
-                <ul>
-                    <li><a href="dichvubaotribaohanhmay.html">Dịch vụ bảo trì, bảo hành máy</a></li>
-                    <li><a href="thongbaobaotrimay.html">Thông báo bảo trì máy</a></li>
-                </ul>
+            <div class="product-price column">
+                <span>${{ item.product.price|floatformat:2 }}</span>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="row cart-total">
+            <span class="total-header">Total</span>
+            <div class="total-price">
+                <span>${{ order.get_cart_total|floatformat:2 }}</span>
             </div>
         </div>
     </div>
-    <footer class="row">
-        <div class="col-sm-12 col-lg-2 logobox">
-            <a href="html/index.html"><img src="images/logo.png"></a>
-        </div>
-        <div class="col-sm-12 col-lg-5 footer-info">
-            <p>127 Đường số 7, Phường An Phú, Quận 2, Thành phố Thủ Đức, Việt Nam</p><br>
-            <p>SĐT: +84-28-22530530 Mã số doanh nghiệp: 0303208007 do Sở KH&ĐT cấp ngày 25/02/2004</p><br>
-            <p>Hotline: 0919 614 119</p>           
-        </div>
-        <div class="col-sm-12 col-lg-5 social-media">
-            <ul>
-                <li><a href="#"><img src="images/zalo.png"></a></li>
-                <li><a href="#" class="fa fa-envelope"></a></li>
-                <li><a href="#" class="fa fa-facebook"></a></li>
-            </ul>
-        </div>
-    </footer>
-</body>
-</html>
+</div>
+{% endblock %}
