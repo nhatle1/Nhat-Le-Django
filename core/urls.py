@@ -18,5 +18,6 @@ urlpatterns = [
     path('thongbaobaotrimay/', thongbaobaotrimay_view, name="thongbaobaotrimay-view"),
     path('tintuc/', tintuc_view, name="tintuc-view"),
     path('vechungtoi/', vechungtoi_view, name="vechungtoi-view"),
-    path('updateItem/', updateItem_view, name="update-item")
+    path('updateItem/', updateItem_view, name="update-item"),
+    path('checkout/', checkout_view, name="checkout-view"),
 ]

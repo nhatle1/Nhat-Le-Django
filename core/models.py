@@ -13,7 +13,7 @@ class Customer(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    price = models.FloatField()
+    price = models.IntegerField()
     image = models.ImageField(upload_to="static/images")
     productType = models.TextField()
 

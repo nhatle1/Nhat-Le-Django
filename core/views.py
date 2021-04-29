@@ -90,6 +90,7 @@ def giohang_view(request):
         'items':items, 
         'order':order,
         'cartItems':cartItems,
+        'customer': customer,
     }
     return render(request, 'giohang.html', context)
 
@@ -213,10 +214,24 @@ def updateItem_view(request):
         orderitem.quantity = orderitem.quantity + 1
     elif action == 'remove':
         orderitem.quantity = orderitem.quantity - 1
-    
-    orderitem.save()
 
-    if orderitem.quantity <= 0:
+    orderitem.save()
+    if action == 'delete':
         orderitem.delete()
     
     return JsonResponse('Item was added', safe=False)
+
+
+def checkout_view(request):
+    if request.user.is_authenticated:
+        customer =  request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        cartItems = order.get_cart_items
+    else:
+        order = { 'get_cart_total':0 }
+
+    context = {
+        'order':order,
+        'cartItems':cartItems,
+    }
+    return render(request, 'checkout.html', context)

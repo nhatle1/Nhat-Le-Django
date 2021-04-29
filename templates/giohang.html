@@ -2,36 +2,67 @@
 {% load static %}
 {% block content %}
 <div class="shopping-cart-content">
-    <div class="shopping-cart-table">
-        <h2>Giỏ hàng của tôi</h2>
-        <div class="row shopping-cart-description">
-            <span>Price</span>
-        </div>
-        {% for item in items %}
-        <div class="row product-info">
-            <img class="product-img" src="{{ item.product.image.url }}">
-            <div class="col-sm-7 product-specs column">
-                <ul>
-                    <li class="product-name"><span>{{ item.product.title }}</span></li>
-                    <li class="remove-button"><span class="rmv-btn">Remove</span></li>
-                    <li class="product-quantity">
-                        <div class="cart-quantity">
-                            <span class="quantity-decrease update-cart" data-product="{{ item.product.id }}" data-action="remove">-</span>
-                            <input class="quantity-input" value="{{ item.quantity }}">
-                            <span class="quantity-increase update-cart" data-product="{{ item.product.id }}" data-action="add">+</span>
-                        </div>
-                    </li>
-                </ul>
+    <div class="row">
+        <div class="col-md-8 shopping-cart-table">
+            <h2>Giỏ hàng của tôi</h2>
+            <div class="row shopping-cart-description">
+                <span>Price</span>
             </div>
-            <div class="product-price column">
-                <span>${{ item.product.price|floatformat:2 }}</span>
+            {% for item in items %}
+            <div class="row product-info">
+                <img class="product-img" src="{{ item.product.image.url }}">
+                <div class="col-sm-7 product-specs column">
+                    <ul>
+                        <li class="product-name"><span>{{ item.product.title }}</span></li>
+                        <li class="remove-button"><span class="rmv-btn update-cart" data-product="{{ item.product.id }}" data-action="delete">Remove</span></li>
+                        <li class="product-quantity">
+                            <div class="cart-quantity">
+                                <span class="quantity-decrease update-cart" data-product="{{ item.product.id }}" data-action="remove">-</span>
+                                <input class="quantity-input" value="{{ item.quantity }}">
+                                <span class="quantity-increase update-cart" data-product="{{ item.product.id }}" data-action="add">+</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="product-price column">
+                    <span>${{ item.product.price }}</span>
+                </div>
             </div>
+            {% endfor %}
+            <!-- <div class="row cart-total">
+                <span class="total-header">Total</span>
+                <div class="total-price">
+                    <span>${{ order.get_cart_total|floatformat:2 }}</span>
+                </div>
+            </div> -->
         </div>
-        {% endfor %}
-        <div class="row cart-total">
-            <span class="total-header">Total</span>
-            <div class="total-price">
-                <span>${{ order.get_cart_total|floatformat:2 }}</span>
+        <div class="col-md-3 cart-checkout">
+            <div class="cart-checkout--inner">
+                <div class="shipping-info">
+                    <p class="heading"></p>   
+                    <p class="title">
+                        <b class="name">{{ customer.name }}</b>
+                        <b class="phone">Your phone number</b>
+                    </p>
+                    <p class="address">
+                        Your address
+                    </p>
+                </div>
+                <div class="cart-total">
+                    <div class="prices">
+                        <ul class="price_items">
+                            <li class="price_item">
+                                <span class="price_text">Tam Tinh</span>
+                                <span class="price_value">{{ order.get_cart_total }}</span>
+                            </li>
+                        </ul>
+                        <p class="prices_total">
+                            <span class="price_text">Thanh Tien</span>
+                            <span class="price_value price_value--final">{{ order.get_cart_total }}</span>
+                        </p>
+                    </div>
+                </div>
+                <button class="cart_submit" type="button">Checkout</button>
             </div>
         </div>
     </div>
