@@ -22,7 +22,6 @@ function UpdateCart(event)
 
 function UpdateUserOrder(productId, action)
 {
-    console.log("User is logged in, sending data...");
     var url = '/updateItem/'
     fetch(url, {
         method: 'POST', 

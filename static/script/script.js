@@ -8,18 +8,6 @@ for (var i = 0; i < inputValue.length; ++i)
     }
 }
 
-var checkoutBtn = document.getElementsByClassName('cart_submit')
-checkoutBtn[0].addEventListener('click', function() {
-    if (user === "AnonymousUser")
-    {
-        console.log("User is not authenticated")
-    }
-    else
-    {
-        window.location.replace('/checkout/')
-    }
-})
-
 function dropdownmenu() {
     var x = document.getElementById("navbar");
     if (x.className === "topnav") {

@@ -42,6 +42,7 @@
                     <p class="heading"></p>   
                     <p class="title">
                         <b class="name">{{ customer.name }}</b>
+                        <span class="split">|</span>
                         <b class="phone">Your phone number</b>
                     </p>
                     <p class="address">
@@ -67,4 +68,24 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    var checkoutBtn = document.getElementsByClassName('cart_submit')
+    checkoutBtn[0].addEventListener('click', function() {
+        if (user === "AnonymousUser")
+        {
+            console.log("User is not authenticated")
+        }
+        else
+        {
+            window.location.replace('/checkout/')
+        }
+    })
+
+    var shipping = '{{ order.shippingEligibility }}'
+    if (shipping === 'False')
+    {
+        document.getElementsByClassName('address')[0].innerHTML = ""
+        document.getElementsByClassName('phone')[0].innerHTML = "{{ customer.email }}"
+    } 
+</script>
 {% endblock %}

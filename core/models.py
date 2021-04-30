@@ -16,6 +16,7 @@ class Product(models.Model):
     price = models.IntegerField()
     image = models.ImageField(upload_to="static/images")
     productType = models.TextField()
+    ship = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
@@ -35,10 +36,20 @@ class Order(models.Model):
         total = sum([item.get_total for item in orderitems])
         return total
 
+    @property
     def get_cart_items(self):
         orderitems = self.orderitem_set.all()
         total = sum([item.quantity for item in orderitems])
         return total
+    
+    @property
+    def shippingEligibility(self):
+        shipping = False
+        orderitems = self.orderitem_set.all()
+        for orderitem in orderitems: 
+            if orderitem.product.ship == True:
+                shipping = True        
+        return shipping
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
@@ -53,10 +64,10 @@ class OrderItem(models.Model):
 
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
     address = models.CharField(max_length=200, null=True)
     city = models.CharField(max_length=200, null=True)   
     date_added = models.DateTimeField(auto_now_add=True)
+    default = models.BooleanField(default=False)
 
     def __str__(self):
         return self.address

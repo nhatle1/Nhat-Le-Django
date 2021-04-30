@@ -412,10 +412,6 @@ span.total-header {
   font-size: 14px;
 }
 
-.name {
-  margin-right: 10px; 
-}
-
 .name, .phone {
   font-size: 15px;
   display: inline-block;
@@ -482,4 +478,126 @@ span.total-header {
   display: block;
   margin: 15px 0px; 
   cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.split {
+  color: #cccccc;
+  padding: 0 15px;
+}
+
+.address-info-content {
+  padding: 30px 20px;
+}
+
+.address-info-heading {
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.add-address {
+  cursor: pointer;
+  color: rgb(13, 92, 182); 
+  text-decoration: underline;
+  font-size: 16px; 
+}
+
+.shipping-address-info-title {
+  background: #fafafa;
+  padding: 20px 0px; 
+}
+
+.address-form {
+  width: 70%; 
+  display: flex; 
+  justify-content: center;
+  background: rgb(247, 247, 247) none repeat scroll 0% 0%;
+  border: 1px solid rgb(221, 221, 221);
+  box-shadow: none;
+  border-radius: 0px 0px 3px 3px;
+  margin: 0px auto; 
+  padding: 10px 15px; 
+  transition: max-height 0.5s ease-out 0s;
+  max-height: 650px;
+  overflow: hidden;
+}
+
+.form-container {
+  width: 50%; 
+  align-items: center;
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center; 
+}
+
+.abc {
+  font-size: 13px;
+  margin: 0px 0px 15px;
+  display: flex;
+  -moz-box-align: center;
+  align-items: center;
+  flex-wrap: wrap;
+  color: rgb(51, 51, 51);
+}
+
+.form-container label {
+  font-weight: 700;
+  width: 33.3333%;
+}
+
+.form-input input, .form-input textarea {
+  width: 66.6666%;
+}
+
+.form-input input {
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  border: 1px solid rgb(204, 204, 204); 
+  border-radius: 4px;
+  height: 34px;
+  padding: 6px 12px; 
+  line-height: 34px;
+  outline: currentColor none medium;
+}
+
+button, input {
+  overflow: visible;  
+}
+
+.form-input textarea {
+  max-width: 408.383 px;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  border: 1px solid rgb(204, 204, 204); 
+  border-radius: 4px;
+  padding: 6px 12px; 
+  line-height: 20px;
+  outline: currentColor none medium;
+}
+
+textarea {
+  overflow: auto; 
+}
+
+.button-group {
+  width: 66.6666%; 
+  display: flex; 
+  -moz-box-pack: justify;
+  justify-content: space-between;
+}
+
+.button-group button {
+  padding: 10px 0px;
+  font-size: 13px;
+  flex: 1 0 40%;
+  border-color: rgb(225, 225, 225);
+  outline-color: rgb(204, 204, 204); 
+  border-radius: 5px;
+}
+
+.cancel-button {
+  margin-right: 10px;
 }

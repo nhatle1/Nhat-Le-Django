@@ -20,4 +20,6 @@ urlpatterns = [
     path('vechungtoi/', vechungtoi_view, name="vechungtoi-view"),
     path('updateItem/', updateItem_view, name="update-item"),
     path('checkout/', checkout_view, name="checkout-view"),
+    path('shippinginfo/', shipping_info_view, name="shippinginfo-view"),
+    path('processAddressData/', updateAddress_view, name="updateAddress-view"),
 ]
