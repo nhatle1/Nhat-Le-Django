@@ -7,37 +7,39 @@
             <span class="split">|</span>
             <span class="add-address" id="new-address">Add new address</span>
         </div>
-        <div class="row shipping-address-info-title" id="address-table-heading">
-            <div class="col-md-2 name address-columns">
-                <span>Full name</span>
+        <div class="address-table-content-wrapper" id="address-table">
+            <div class="row shipping-address-info-title">
+                <div class="col-md-2 name address-columns">
+                    <span>Full name</span>
+                </div>
+                <div class="col-md-5 shipping-address address-columns">
+                    <span>Address</span>
+                </div>
+                <div class="col-md-2 phone-number address-columns">
+                    <span>Phone number</span>
+                </div>
+                <div class="col-md-3 email address-columns">
+                    <span>Email</span>
+                </div>
             </div>
-            <div class="col-md-5 shipping-address address-columns">
-                <span>Address</span>
+            {% for address in addresses %}
+            <div class="row shipping-address-info-content address-table" style="padding: 20px 0px">
+                <div class="col-md-2 name address-columns">
+                    <span>{{ customer.name }}</span>
+                </div>
+                <div class="col-md-5 shipping-address address-columns">
+                    <span>{{ address.address }}, {{ address.city }}</span>
+                </div>
+                <div class="col-md-2 phone-number address-columns">
+                    <span>Your phone number</span>
+                </div>
+                <div class="col-md-3 email address-columns">
+                    <span>{{ customer.email }}</span>
+                </div>
             </div>
-            <div class="col-md-2 phone-number address-columns">
-                <span>Phone number</span>
-            </div>
-            <div class="col-md-3 email address-columns">
-                <span>Email</span>
-            </div>
+            {% endfor %}
         </div>
-        {% for address in addresses %}
-        <div class="row shipping-address-info-content address-table" style="padding: 20px 0px" id="address-table-content">
-            <div class="col-md-2 name address-columns">
-                <span>{{ customer.name }}</span>
-            </div>
-            <div class="col-md-5 shipping-address address-columns">
-                <span>{{ address.address }}, {{ address.city }}</span>
-            </div>
-            <div class="col-md-2 phone-number address-columns">
-                <span>Your phone number</span>
-            </div>
-            <div class="col-md-3 email address-columns">
-                <span>{{ customer.email }}</span>
-            </div>
-        </div>
-        {% endfor %}
-        <div class="form-wrapper hidden" id="form-wrapper">
+        <div class="hidden form-wrapper" id="form-wrapper">
             <form class="address-form" id="form">
                 <div class="form-container">
                     <div class="form-input abc">
@@ -60,12 +62,13 @@
                         <textarea name="address" class="form-input-address" placeholder="For example: 92 Nguyen Huu Canh street"></textarea>
                         <div class="input-error-name hidden">Please enter your name</div>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
+                    <div class="form-check abc">
+                        <label></label>
+                        <input class="tickbox" type="checkbox" onclick="checkTickbox()" id="flexCheckDefault" style="cursor: pointer" name="default">
+                        <label class="form-check-label" for="flexCheckDefault" style="cursor: pointer; font-weight: 500; font-size: 12px">
+                          Set as default address
                         </label>
-                      </div>
+                    </div>
                     <div class="buttons-container abc">
                         <label></label>
                         <div class="button-group">
@@ -78,27 +81,42 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
+<script type="text/javascript" async>
     var have_address = '{{ have_address }}'
+    var defaultValue = 'False'
     if (addressListEmpty() === 'True')
     {
         document.getElementById('form-wrapper').classList.remove('hidden')
     }
+    
     function addressListEmpty()
     {
         if (have_address === 'False')
         {
-            document.getElementById('address-table-heading').classList.add('hidden')
-            document.getElementById('address-table-content').classList.add('hidden')
+            document.getElementById('address-table').classList.add('hidden')
             return 'True'
         }
         return 'False'
     }
+
+    function checkTickbox() 
+    {
+        var checkbox = document.getElementById('flexCheckDefault')
+        if (checkbox.checked == true)
+        {
+            defaultValue = 'True'
+        }
+        else 
+        {
+            defaultValue = 'False'
+        }
+    }
+
+
     document.getElementById('new-address').addEventListener('click', function(){
-        document.getElementById('address-table-heading').classList.add('hidden')
-        document.getElementById('address-table-content').classList.add('hidden')
         document.getElementById('form-wrapper').classList.remove('hidden')
     })
+
 
     document.getElementById('cancel').addEventListener('click', function(){
         if (addressListEmpty() === 'True')
@@ -107,40 +125,42 @@
         }
         else 
         {
-            document.getElementById('address-table-heading').classList.add('hidden')
-            document.getElementById('address-table-content').classList.add('hidden')
+            document.getElementById('address-table').classList.add('hidden')
             document.getElementById('form-wrapper').classList.remove('hidden')
         }
     })
+    
 
     document.getElementById('create-update').addEventListener('click', submitFormData)
     function submitFormData() 
     {
         var userFormData = {
-            'name': null, 
-            'email': null,
+            'name': form.full_name.value, 
+            'email': form.email.value,
         }
 
         var shippingInfo = {
-            'address': null,
-            'city': null, 
-            'state': null, 
-            'zipcode':null,
+            'address': form.address.value,
+            'city': form.city.value, 
+            'default': defaultValue,
         }
-    }
 
-    var url = '/processAddressData/'
-    fetch (url,{
-        headers: {
-            'Content-Type':'application/json',
-            'X_CSRFToken':csrftoken,
-        },
-        body: JSON.stringify({'form':userFormData, 'shipping':shippingInfo})
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        console.log("promise")
-        window.location.reload()
-    })
+        var url = '/processAddressData/'
+        fetch(url, {
+            method: 'POST', 
+            headers: {
+                'Content-Type':'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo})
+        })
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+            console.log("Data:", data)
+            location.reload()
+        });
+    }
 </script>
 {% endblock %}

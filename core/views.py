@@ -286,13 +286,24 @@ def shipping_info_view(request):
     return render(request, 'shippinginfo.html', context)
 
 def updateAddress_view(request):
+    if (request.method == "POST"):
+        print(request.POST)
+    data = json.loads(request.body)
+    print(data)
     if request.user.is_authenticated:
         name = data['form']['name']
         email = data['form']['email']
         address = data['shipping']['address']
         city = data['shipping']['city']
-        customer = Customer.objects.get_or_create(user=request.user, name=name, email=email)
-        default=False
-        if not customer.shippingaddress_set.exists():
-            default=True
-    return JsonResponse("Sumitted...", safe=False)
+        defaultValue = data['shipping']['default']
+        default = False
+        if default == 'True':
+            default = True
+        customer = request.user.customer
+        ShippingAddress.objects.create(
+            customer=customer, 
+            address=address,
+            city=city,
+            default=default,
+        )
+    return JsonResponse("Nhat Le", safe=False)

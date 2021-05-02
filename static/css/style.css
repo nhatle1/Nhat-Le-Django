@@ -601,3 +601,15 @@ textarea {
 .cancel-button {
   margin-right: 10px;
 }
+
+.form-check {
+  padding: 0; 
+}
+
+.tickbox {
+  margin-right: 5px; 
+}
+
+.hidden {
+  display: none;
+}
