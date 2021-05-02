@@ -297,13 +297,16 @@ def updateAddress_view(request):
         city = data['shipping']['city']
         defaultValue = data['shipping']['default']
         default = False
-        if default == 'True':
-            default = True
         customer = request.user.customer
+        if defaultValue == 'True':
+            default = True
+            customer.changeDefaultAddress
         ShippingAddress.objects.create(
             customer=customer, 
             address=address,
             city=city,
             default=default,
+            name=name,
+            email=email,
         )
     return JsonResponse("Nhat Le", safe=False)
