@@ -22,4 +22,5 @@ urlpatterns = [
     path('checkout/', checkout_view, name="checkout-view"),
     path('shippinginfo/', shipping_info_view, name="shippinginfo-view"),
     path('processAddressData/', updateAddress_view, name="updateAddress-view"),
+    path('changeDefaultAddress/', changeDefaultAddress_view, name="changedefaultaddress-view"),
 ]

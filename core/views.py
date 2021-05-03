@@ -88,6 +88,12 @@ def giohang_view(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
+        if customer.shippingaddress_set.exists():
+            addresses = customer.shippingaddress_set.all()
+            have_address=True
+        else:
+            addresses = []
+            have_address=False
     else:
         items = []
         order = { 'get_cart_total':0 }
@@ -98,6 +104,8 @@ def giohang_view(request):
         'cartItems':cartItems,
         'customer': customer,
         'shipping':False,
+        'addresses': addresses,
+        'have_address': have_address,
     }
     return render(request, 'giohang.html', context)
 
@@ -300,7 +308,10 @@ def updateAddress_view(request):
         customer = request.user.customer
         if defaultValue == 'True':
             default = True
-            customer.changeDefaultAddress
+            for addr in addresses:
+                addr.default = False
+                addr.save()
+            
         ShippingAddress.objects.create(
             customer=customer, 
             address=address,
@@ -309,4 +320,20 @@ def updateAddress_view(request):
             name=name,
             email=email,
         )
+    return JsonResponse("Nhat Le", safe=False)
+
+
+def changeDefaultAddress_view(request):
+    data = json.loads(request.body)
+    defaultId = int(data['defaultId'])
+    print(data)
+    customer = request.user.customer
+    addresses = customer.shippingaddress_set.all()
+    for addr in addresses:
+        print(addr.id)
+        if addr.id == defaultId:
+            addr.default = True
+        else:
+            addr.default = False
+        addr.save()
     return JsonResponse("Nhat Le", safe=False)

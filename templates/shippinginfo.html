@@ -18,8 +18,11 @@
                 <div class="col-md-2 phone-number address-columns">
                     <span>Phone number</span>
                 </div>
-                <div class="col-md-3 email address-columns">
+                <div class="col-md-2 email address-columns">
                     <span>Email</span>
+                </div>
+                <div class="col-md-1 default-address address-columns">
+                    <span>Default address</span>
                 </div>
             </div>
             {% for address in addresses %}
@@ -33,8 +36,15 @@
                 <div class="col-md-2 phone-number address-columns">
                     <span>Your phone number</span>
                 </div>
-                <div class="col-md-3 email address-columns">
+                <div class="col-md-2 email address-columns">
                     <span>{{ address.email }}</span>
+                </div>
+                <div class="col-md-1 default-address address-columns">
+                {% if address.default == True %}
+                    <input class="form-check-input default-radio" type="radio" name="exampleRadios" id="exampleRadios1" value="{{ address.id }}" data-default="{{ address.id }}" checked>
+                {% else %}
+                    <input class="form-check-input default-radio" type="radio" name="exampleRadios" id="exampleRadios1" data-default="{{ address.id }}" value="{{ address.id }}">
+                {% endif %}
                 </div>
             </div>
             {% endfor %}
@@ -114,6 +124,7 @@
 
 
     document.getElementById('new-address').addEventListener('click', function(){
+        document.getElementById('address-table').classList.add('hidden')
         document.getElementById('form-wrapper').classList.remove('hidden')
     })
 
@@ -153,6 +164,47 @@
                 'X-CSRFToken': csrftoken,
             },
             body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo})
+        })
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+            console.log("Data:", data)
+            location.reload()
+        });
+    }
+
+    var radioDefault = document.getElementsByClassName('default-radio')
+
+    for (var i = 0; i < radioDefault.length; ++i)
+    {
+        radioDefault[i].addEventListener('click', ChangeAddress)
+    }
+
+    function ChangeAddress(event)
+    {
+        var defaultId = this.dataset.default
+        if (user === 'AnonymousUser')
+        {
+            console.log("User is not authenticated")
+        }
+        else
+        {
+            console.log("User:", user)
+            UpdateDefault(defaultId)
+        }
+    }
+
+    function UpdateDefault(defaultId)
+    {
+        var url = '/changeDefaultAddress/'
+        fetch(url, {
+            method: 'POST', 
+            headers: {
+                'Content-Type':'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body:JSON.stringify({'defaultId':defaultId,})
         })
         .then((response) => {
             return response.json()

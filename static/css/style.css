@@ -480,10 +480,6 @@ span.total-header {
   cursor: pointer;
 }
 
-.hidden {
-  display: none;
-}
-
 .split {
   color: #cccccc;
   padding: 0 15px;
@@ -505,9 +501,14 @@ span.total-header {
   font-size: 16px; 
 }
 
-.shipping-address-info-title {
+.shipping-address-info-title, .address-table:hover {
   background: #fafafa;
   padding: 20px 0px; 
+}
+
+.address-columns {
+  display: flex; 
+  justify-content: center;
 }
 
 .address-form {
@@ -562,6 +563,28 @@ span.total-header {
   padding: 6px 12px; 
   line-height: 34px;
   outline: currentColor none medium;
+}
+
+.cart-checkout .heading {
+  margin: 0px 0px 15px; 
+  display: flex; 
+  flex-wrap: nowrap; 
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.cart-checkout .text {
+  display: inline-block;
+  font-size: 14px;
+  color: rgb(36, 36, 36);
+  font-weight: 500;
+}
+
+.cart-checkout .link {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 13px;
+  color: rgb(13, 92, 182);
 }
 
 button, input {

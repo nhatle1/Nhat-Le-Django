@@ -14,6 +14,15 @@ class Customer(models.Model):
         shipping = self.shippingaddress_set.all()
         for address in shipping:
             address.default = False
+
+"""     @property 
+    def changeDefaultAddress(self, id):
+        shipping = self.shippingaddress_set.all()
+        for address in shipping:
+            if address.id == id:
+                address.default=True
+            else:
+                address.default = False """
     
 
 class Product(models.Model):
