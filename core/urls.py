@@ -23,5 +23,5 @@ urlpatterns = [
     path('shippinginfo/', shipping_info_view, name="shippinginfo-view"),
     path('processAddressData/', updateAddress_view, name="updateAddress-view"),
     path('changeDefaultAddress/', changeDefaultAddress_view, name="changedefaultaddress-view"),
-    path('completingOrder/', completingOrder_view, name="completingorder-view"),
+    path('register/', register_view, name="register-view"),
 ]

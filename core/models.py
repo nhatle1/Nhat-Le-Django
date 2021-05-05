@@ -26,15 +26,28 @@ class Customer(models.Model):
     
 
 class Product(models.Model):
+    MAYPHOTOCOPY = 'MP'
+    BANGTUONGTAC = 'BT'
+    PRINTSCAN = 'PS'
+    MAYCHIEU = 'MC'
+    MANHINHGHEP = 'MH'
+    PRODUCT_TYPE_CHOICES = [
+        (MAYPHOTOCOPY, 'may photocopy'),
+        (BANGTUONGTAC, 'bang tuong tac'),
+        (PRINTSCAN, 'print scan'),
+        (MAYCHIEU, 'may chieu'),
+        (MANHINHGHEP, 'man hinh ghep'),
+    ]
     title = models.CharField(max_length=100)
     description = models.TextField()
     price = models.IntegerField()
     image = models.ImageField(upload_to="static/images")
-    productType = models.TextField()
+    productType = models.CharField(max_length=20, choices=PRODUCT_TYPE_CHOICES, default=MAYPHOTOCOPY)
     ship = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
+
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL)
@@ -77,8 +90,10 @@ class OrderItem(models.Model):
         total = self.product.price * self.quantity
         return total
 
+
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
+    order = models.OneToOneField(Order, on_delete=models.SET_NULL, blank=True, null=True)
     name = models.CharField(max_length=200, null=True, default='None')
     email = models.CharField(max_length=200, default='None')
     address = models.CharField(max_length=200, null=True)

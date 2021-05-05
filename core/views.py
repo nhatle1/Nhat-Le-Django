@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from django.http import JsonResponse
 import json
 import datetime
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
+from .forms import *
 
 # Create your views here.
 def home_view(request):
@@ -347,5 +350,30 @@ def changeDefaultAddress_view(request):
         addr.save()
     return JsonResponse("Nhat Le", safe=False)
 
-def completingOrder_view(request):
-    return JsonResponse("Nhat Le", safe=False)
+
+""" def completingOrder_view(request):
+    data = json.loads(request.body)
+    transaction_id = datetime.datetime.now().timestamp()
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        address = ShippingAddress.objects.get(default=True)
+        order.shippingaddress = address
+        if int(data['total']) == order.get_cart_total:
+            order.complete = True
+        order.save()
+    return JsonResponse("Nhat le", safe=False)
+ """
+
+def register_view(response):
+    if response.method == "POST":
+        form = RegisterForm(response.POST)
+        if form.is_valid():
+            new_user = form.save()
+            login(response, new_user)
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            customer = Customer.objects.create(user=new_user, name=name, email=email)
+            return redirect('/')
+    form = RegisterForm()
+    return render(response, "register.html", {'form': form})

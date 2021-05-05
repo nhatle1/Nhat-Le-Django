@@ -1,128 +1,109 @@
 {% extends "index.html" %}
 {% block content %}
-<div class="shopping-cart-content">
-    <div class="row">
-        <div class="col-md-8 shopping-cart-table">
-            <h2>My order</h2>
-            <div class="row shopping-cart-description">
-                <span>Price</span>
-            </div>
-            {% for item in items %}
-            <div class="row product-info">
-                <img class="product-img" src="{{ item.product.image.url }}">
-                <div class="col-sm-7 product-specs column">
-                    <ul>
-                        <li class="product-name"><span>{{ item.product.title }}</span></li>
-                        <li class="product-quantity">
-                            <div class="checkout-product-quantity">
-                                <span>Quantity: {{ item.quantity }}</span>
-                            </div>
-                        </li>
-                        <li class="product-quantity">
-                            <div class="checkout-product-quantity">
-                                <span>Total: {{ item.get_total }}</span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="product-price column">
-                    <span>${{ item.product.price }}</span>
+<main style="background: rgb(255,255,255);">
+    <div class="checkout-container" style="display: flex; width: 1200px; flex-wrap: wrap;">
+        <div class="left-column">
+            <div class="checkout-order-content">
+                <h3>Shipping address</h3>
+                <div class="order-content">
+                    {% for address in addresses %}
+                        {% if address.default == True %}
+                            <p class="checkout-name">{{ address.name }}</p>
+                            <p class="checkout-email">{{ address.email }}</p>
+                            <p class="checkout-address">{{ address.address }}, {{ address.city }}</p>
+                        {% endif %}
+                    {% endfor %}
+                            <a href="/shippinginfo/" class="link">Edit</a>
                 </div>
             </div>
-            {% endfor %}
-        </div>
-        <div class="col-md-3 cart-checkout">
-            <div class="cart-checkout--inner">
-                <div class="shipping-info" id="shipping-info">
-                    <p class="heading">
-                        <span class="text">Shipping Address</span>
-                        <a href="/shippinginfo/" class="link">Edit</a>
-                    </p>   
-                    <p class="title">
-                        {% for address in addresses %}
-                            {% if address.default == True %}
-                            <b class="name">{{ address.name }}</b>
-                            <span class="split">|</span>
-                            <b class="phone">{{ address.email }}</b>
-                    </p>
-                    <p class="address">
-                        {{ address.address }}, {{ address.city }}
-                    </p>
-                            {% endif %}
-                        {% endfor %}
-                </div>
-                <div class="cart-total">
-                    <div class="prices">
-                        <ul class="price_items">
-                            <li class="price_item">
-                                <span class="price_text">Tam Tinh</span>
-                                <span class="price_value">{{ order.get_cart_total }}</span>
-                            </li>
-                        </ul>
-                        <p class="prices_total">
-                            <span class="price_text">Thanh Tien</span>
-                            <span class="price_value price_value--final">{{ order.get_cart_total }}</span>
-                        </p>
+            <div class="checkout-order-content">
+                <h3>Your order</h3>
+                <div class="order-content">
+                    {% for item in items %}
+                    <div class="row product-info" style="border-top: none;">
+                        <img class="product-img" src="{{ item.product.image.url }}">
+                        <div class="col-sm-7 product-specs column">
+                            <ul>
+                                <li class="product-name"><span>{{ item.product.title }}</span></li>
+                                <li class="product-quantity"><span>Quantity: {{ item.quantity }}</span></li>
+                                <li class="product-total"><span>Total: {{ item.get_total }}</span></li>
+                            </ul>
+                        </div>
                     </div>
-                    <button class="cart_submit" type="button" id="make-payment">Buy</button>
+                    {% endfor %}
                 </div>
             </div>
+            <div class="checkout-order-content">
+                <h3>Payment method</h3>
+                <div class="order-content">
+                    <div class="row payment-method">
+                        <div class="radioPayment ">
+                            <input class="form-check-input default-radio" type="radio" name="exampleRadios" id="exampleRadios1">
+                        </div>
+                        <div class="payment-type">
+                            <span>Pay with cash</span>
+                        </div>
+                    </div>
+                    <div class="row payment-method">
+                        <div class="radioPayment ">
+                            <input class="form-check-input default-radio" type="radio" name="exampleRadios" id="exampleRadios1">
+                        </div>
+                        <div class="payment-type">
+                            <span>Pay with visa</span>
+                        </div>
+                    </div>
+                    <div class="row payment-method">
+                        <div class="radioPayment">
+                            <input class="form-check-input default-radio" type="radio" name="exampleRadios" id="exampleRadios1">
+                        </div>
+                        <div class="payment-type">
+                            <span>Pay with iternet banking</span>
+                        </div>
+                    </div>
+                    <div class="row payment-method">
+                        <div class="radioPayment">
+                            <input class="form-check-input default-radio" type="radio" name="exampleRadios" id="exampleRadios1">
+                        </div>
+                        <div class="payment-type">
+                            <span>Pay with momo wallet</span>
+                        </div>
+                    </div>
+                    <div class="row payment-method">
+                        <div class="radioPayment ">
+                            <input class="form-check-input default-radio" type="radio" name="exampleRadios" id="exampleRadios1">
+                        </div>
+                        <div class="payment-type">
+                            <span>Pay with zalo pay </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="cart_submit" type="button" style="width: 40%;">Make Payment</button>
+        </div>
+        <div class="right-column">
+            <div class="order-summary">
+                <div class="checkout-title">
+                    <div class="sub-title">
+                        <b>Order summary</b>
+                    </div>
+                </div>
+                <div class="cart">
+                    <div class="price-summary">
+                        <div class="estimated-price">
+                            <div class="inner">
+                                <div>Estimated price</div>
+                                <div>{{ order.get_cart_total }}</div>
+                            </div>
+                        </div>
+                        <div class="total-price">
+                            <div>Total price:</div>
+                            <div class="price-value"> {{ order.get_cart_total }} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="cart_submit" type="button">Make Payment</button>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-8 shopping-cart-table">
-            <h2 style="border-bottom: 1px solid #ddd; padding-bottom: 15px">Payment method</h2>
-            <div class="payment-methods">
-                <div class="row payment-method">
-                    <div class="radioPayment ">
-                        <input class="form-check-input default-radio" type="radio" name="exampleRadios" id="exampleRadios1">
-                    </div>
-                    <div class="payment-type">
-                        <span>Pay with cash</span>
-                    </div>
-                </div>
-                <div class="row payment-method">
-                    <div class="radioPayment ">
-                        <input class="form-check-input default-radio" type="radio" name="exampleRadios" id="exampleRadios1">
-                    </div>
-                    <div class="payment-type">
-                        <span>Pay with visa</span>
-                    </div>
-                </div>
-                <div class="row payment-method">
-                    <div class="radioPayment">
-                        <input class="form-check-input default-radio" type="radio" name="exampleRadios" id="exampleRadios1">
-                    </div>
-                    <div class="payment-type">
-                        <span>Pay with iternet banking</span>
-                    </div>
-                </div>
-                <div class="row payment-method">
-                    <div class="radioPayment">
-                        <input class="form-check-input default-radio" type="radio" name="exampleRadios" id="exampleRadios1">
-                    </div>
-                    <div class="payment-type">
-                        <span>Pay with momo wallet</span>
-                    </div>
-                </div>
-                <div class="row payment-method">
-                    <div class="radioPayment ">
-                        <input class="form-check-input default-radio" type="radio" name="exampleRadios" id="exampleRadios1">
-                    </div>
-                    <div class="payment-type">
-                        <span>Pay with zalo pay </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script type="text/javascript">
-    var have_address = '{{ have_address }}'
-    var shipping = '{{ order.shippingEligibility }}'
-    if (have_address == 'False' || shipping == 'False')
-    {
-        document.getElementById('shipping-info').classList.add('hidden')
-    }
-</script>
+</main>
 {% endblock %}

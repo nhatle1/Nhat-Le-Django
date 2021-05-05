@@ -32,24 +32,6 @@
         </div>
         <div class="col-md-3 cart-checkout">
             <div class="cart-checkout--inner">
-                <div class="shipping-info" id="shipping-info">
-                    <p class="heading">
-                        <span class="text">Shipping Address</span>
-                        <a href="/shippinginfo/" class="link">Edit</a>
-                    </p>   
-                    <p class="title">
-                        {% for address in addresses %}
-                            {% if address.default == True %}
-                            <b class="name">{{ address.name }}</b>
-                            <span class="split">|</span>
-                            <b class="phone">{{ address.email }}</b>
-                    </p>
-                    <p class="address">
-                        {{ address.address }}, {{ address.city }}
-                    </p>
-                            {% endif %}
-                        {% endfor %}
-                </div>
                 <div class="cart-total">
                     <div class="prices">
                         <ul class="price_items">
@@ -80,7 +62,7 @@
     checkoutBtn[0].addEventListener('click', function() {
         if (user === "AnonymousUser")
         {
-            console.log("User is not authenticated")
+            window.location.replace('/register/')
         }
         else
         {
