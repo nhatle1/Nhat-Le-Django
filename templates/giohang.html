@@ -29,12 +29,6 @@
                 </div>
             </div>
             {% endfor %}
-            <!-- <div class="row cart-total">
-                <span class="total-header">Total</span>
-                <div class="total-price">
-                    <span>${{ order.get_cart_total|floatformat:2 }}</span>
-                </div>
-            </div> -->
         </div>
         <div class="col-md-3 cart-checkout">
             <div class="cart-checkout--inner">
@@ -77,7 +71,8 @@
 </div>
 <script type="text/javascript">
     var have_address = '{{ have_address }}'
-    if (have_address == 'False')
+    var shipping = '{{ order.shippingEligibility }}'
+    if (have_address == 'False' || shipping == 'False')
     {
         document.getElementById('shipping-info').classList.add('hidden')
     }
@@ -92,12 +87,5 @@
             window.location.replace('/checkout/')
         }
     })
-
-    var shipping = '{{ order.shippingEligibility }}'
-    if (shipping === 'False')
-    {
-        document.getElementsByClassName('address')[0].innerHTML = ""
-        document.getElementsByClassName('phone')[0].innerHTML = "{{ customer.email }}"
-    } 
 </script>
 {% endblock %}

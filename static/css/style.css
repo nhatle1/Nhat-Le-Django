@@ -4,6 +4,10 @@ html {
   font-size: 14px; 
 }
 
+div {
+  display: block;
+}
+
 body {
   line-height: 1.15;
   margin: 0;
@@ -287,6 +291,7 @@ div.social-media img {
   width: 80%; 
   background-color: white;
   padding: 10px; 
+  margin-bottom: 10px;
 }
 
 .shopping-cart-content {
@@ -295,6 +300,7 @@ div.social-media img {
   background-color: #e6e6e6;
   margin: 0; 
   padding: 20px 0 20px 200px;   
+  flex-direction: column;
 }
 
 .product-price {
@@ -635,4 +641,34 @@ textarea {
 
 .hidden {
   display: none;
+}
+
+.checkout-product-quantity {
+  border: none;
+}
+
+.payment-methods ul {
+  list-style-type: none;
+}
+
+.radioPayment {
+  display: flex;
+  justify-content: center;
+  padding: 0; 
+  width: 40px;
+}
+
+.payment-type {
+  padding: 0;
+}
+
+.payment-method {
+  padding: 20px 0;
+}
+
+.input-error {
+  color: rgb(169,68,66);
+  font-size: 11px; 
+  margin-top: 5px;
+  margin-left: 205px;
 }

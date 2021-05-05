@@ -250,6 +250,12 @@ def checkout_view(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
+        if customer.shippingaddress_set.exists():
+            addresses = customer.shippingaddress_set.all()
+            have_address=True
+        else:
+            addresses = []
+            have_address=False
     else:
         items = []
         order = { 'get_cart_total':0 }
@@ -260,6 +266,8 @@ def checkout_view(request):
         'order':order,
         'cartItems':cartItems,
         'shipping':False,
+        'addresses':addresses,
+        'have_address':have_address,
     }
     return render(request, 'checkout.html', context)
 
@@ -306,6 +314,7 @@ def updateAddress_view(request):
         defaultValue = data['shipping']['default']
         default = False
         customer = request.user.customer
+        addresses = customer.shippingaddress_set.all()
         if defaultValue == 'True':
             default = True
             for addr in addresses:
@@ -336,4 +345,7 @@ def changeDefaultAddress_view(request):
         else:
             addr.default = False
         addr.save()
+    return JsonResponse("Nhat Le", safe=False)
+
+def completingOrder_view(request):
     return JsonResponse("Nhat Le", safe=False)
